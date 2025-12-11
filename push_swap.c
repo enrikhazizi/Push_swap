@@ -43,7 +43,7 @@ int	main(int argc, char **argv)
 	char	**token;
 	int		i;
 
-	if(argc == 1)
+	if (argc == 1)
 		return (0);
 	i = 0;
 	whole_stack_b = NULL;
@@ -53,7 +53,6 @@ int	main(int argc, char **argv)
 	{
 		log = malloc(sizeof(t_logs));
 		init_log(log);
-		i = 0;
 		while (token[i])
 		{
 			create_list(&whole_stack, ft_atoi(token[i]));
@@ -62,7 +61,6 @@ int	main(int argc, char **argv)
 	}
 	else
 		printf("\n");
-		
 	bubble_sort_list(&whole_stack, log);
 	print_list(whole_stack);
 }
