@@ -89,9 +89,11 @@ int	main(int argc, char **argv)
 		printf("Invalid arguments"); /*debugging*/
 		return (1);
 	}
-	/*debugging*/
+	/*debugging and testing*/
 	printf("%s\n", mode);
+	printf("disorder before : %f\n", comput_disorader(&whole_stack));
 	bubble_sort_list(&whole_stack, &log);
 	print_list(whole_stack);
+	printf("disorder after : %f\n", comput_disorader(&whole_stack));
 	return (0);
 }

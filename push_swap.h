@@ -16,6 +16,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <stddef.h>
 # include "./libft/libft.h"
 
 typedef struct s_moves
@@ -47,6 +48,7 @@ typedef struct s_logs
 	int		total;
 }	t_logs;
 
+double	compute_disorder(t_stack *first);
 void	print_list(t_stack *stack);
 void	swap_a(t_stack **stack, t_logs *logs);
 void	init_log(t_logs *log);
