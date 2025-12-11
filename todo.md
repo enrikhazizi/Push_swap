@@ -1,6 +1,7 @@
 # To Do
 - Add libft -- done
-- Make parsing right
+- Make parsing -- done
+
 - Make compute disorder function
 - Make medium algorithm
 - Make complex algorithm
