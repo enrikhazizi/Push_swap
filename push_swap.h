@@ -48,8 +48,6 @@ typedef struct s_logs
 }	t_logs;
 
 void	print_list(t_stack *stack);
-int		count_words(char *str);
-int		is_space(char c);
 void	swap_a(t_stack **stack, t_logs *logs);
 void	init_log(t_logs *log);
 void	push_front(t_stack **stack, t_stack *node);
@@ -64,5 +62,14 @@ float	comput_disorader(t_stack **stack);
 int		get_max(t_stack **node);
 void	bubble_sort_list(t_stack **stack, t_logs *logs);
 int		get_list_size(t_stack *stack);
+int		is_nr(char *str);
+int		set_mode(char **mode, char *str);
+void	free_split(char **token);
+int		create_from_single(char *str, t_stack **whole_stack);
+int		create_from_multi(char **ptr, t_stack **whole_stack);
+int		parse_args(int argc, char **argv, t_stack **whole_stack, char **mode);
+void	create_list(t_stack **stack, int data);
+void	init(t_stack **whole_stack, t_stack **whole_stack_b, t_logs *log,
+			char **mode);
 
 #endif

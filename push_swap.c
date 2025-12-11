@@ -35,32 +35,63 @@ void	create_list(t_stack **stack, int data)
 	last_node->next = new_node;
 }
 
+int	parse_args(int argc, char **argv, t_stack **whole_stack, char **mode)
+{
+	if (argc == 2 && is_nr(argv[1]))
+		return (create_from_single(argv[1], whole_stack));
+	else if (argc == 3)
+	{
+		if (!is_nr(argv[1]))
+		{
+			if (!set_mode(mode, argv[1]))
+				return (0);
+			return (create_from_single(argv[2], whole_stack));
+		}
+		return (create_from_multi(argv + 1, whole_stack));
+	}
+	else if (argc > 3)
+	{
+		if (!is_nr(argv[1]))
+		{
+			if (!set_mode(mode, argv[1]))
+				return (0);
+			return (create_from_multi(argv + 2, whole_stack));
+		}
+		return (create_from_multi(argv + 1, whole_stack));
+	}
+	return (0);
+}
+
+void	init(t_stack **whole_stack, t_stack **whole_stack_b, t_logs *log,
+		char **mode)
+{
+	init_log(log);
+	*whole_stack_b = NULL;
+	*whole_stack = NULL;
+	*mode = "--adaptive";
+}
+
 int	main(int argc, char **argv)
 {
 	t_stack	*whole_stack;
 	t_stack	*whole_stack_b;
-	t_logs	*log;
-	char	**token;
-	int		i;
+	t_logs	log;
+	char	*mode;
 
 	if (argc == 1)
-		return (0);
-	i = 0;
-	whole_stack_b = NULL;
-	whole_stack = NULL;
-	token = ft_split(argv[1], ' ');
-	if (argc == 2)
 	{
-		log = malloc(sizeof(t_logs));
-		init_log(log);
-		while (token[i])
-		{
-			create_list(&whole_stack, ft_atoi(token[i]));
-			i++;
-		}
+		printf("Invalid arguments"); /*debugging*/
+		return (1);
 	}
-	else
-		printf("\n");
-	bubble_sort_list(&whole_stack, log);
+	init(&whole_stack, &whole_stack_b, &log, &mode);
+	if (!parse_args(argc, argv, &whole_stack, &mode))
+	{
+		printf("Invalid arguments"); /*debugging*/
+		return (1);
+	}
+	/*debugging*/
+	printf("%s\n", mode);
+	bubble_sort_list(&whole_stack, &log);
 	print_list(whole_stack);
+	return (0);
 }
