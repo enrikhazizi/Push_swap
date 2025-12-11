@@ -48,7 +48,7 @@ int	main(int argc, char **argv)
 	i = 0;
 	whole_stack_b = NULL;
 	whole_stack = NULL;
-	token = ft_split(argv[1]);
+	token = ft_split(argv[1], ' ');
 	if (argc == 2)
 	{
 		log = malloc(sizeof(t_logs));

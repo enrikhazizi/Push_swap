@@ -16,6 +16,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include "./libft/libft.h"
 
 typedef struct s_moves
 {
@@ -46,13 +47,9 @@ typedef struct s_logs
 	int		total;
 }	t_logs;
 
-int		ft_atoi(const char *str);
-int		ft_strlen(const char *str);
 void	print_list(t_stack *stack);
 int		count_words(char *str);
 int		is_space(char c);
-char	*ft_strcpy(char *str);
-char	**ft_split(char *str);
 void	swap_a(t_stack **stack, t_logs *logs);
 void	init_log(t_logs *log);
 void	push_front(t_stack **stack, t_stack *node);
