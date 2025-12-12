@@ -8,8 +8,8 @@
         include, for example: arguments that are not integers, integers outside the valid range, or
         duplicate values.
 - Make compute disorder function -- done
+- Make anothe simple algorithm -- insertion sort done
 
-- Make anothe simple algorithm 
 - Make medium algorithm
 - Make complex algorithm
 - Print or log all the operations
