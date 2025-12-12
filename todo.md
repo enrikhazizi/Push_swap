@@ -7,7 +7,9 @@
         • In case of error, it must display "Error" followed by a \n on the standard error. Errors
         include, for example: arguments that are not integers, integers outside the valid range, or
         duplicate values.
-- Make compute disorder function
+- Make compute disorder function -- done
+- Make anothe simple algorithm -- insertion sort done
+
 - Make medium algorithm
 - Make complex algorithm
 - Print or log all the operations
