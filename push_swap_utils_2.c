@@ -94,3 +94,16 @@ int	get_list_size(t_stack *stack)
 	}
 	return (count);
 }
+
+void	free_split(char **token)
+{
+	int	i;
+
+	i = 0;
+	while (token[i])
+	{
+		free(token[i]);
+		i++;
+	}
+	free(token);
+}
