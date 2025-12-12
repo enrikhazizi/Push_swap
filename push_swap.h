@@ -51,6 +51,7 @@ typedef struct s_logs
 double	compute_disorder(t_stack *first);
 void	print_list(t_stack *stack);
 void	swap_a(t_stack **stack, t_logs *logs);
+void	swap_b(t_stack **stack, t_logs *logs);
 void	init_log(t_logs *log);
 void	push_front(t_stack **stack, t_stack *node);
 t_stack	*pop_head(t_stack **stack);
@@ -63,6 +64,7 @@ void	rrotate_a(t_stack **stack, t_logs *logs);
 float	comput_disorader(t_stack **stack);
 int		get_max(t_stack **node);
 void	bubble_sort_list(t_stack **stack, t_logs *logs);
+void	insertion_sort_list(t_stack **stack_a, t_stack **stack_b, t_logs *logs);
 int		get_list_size(t_stack *stack);
 int		is_nr(char *str);
 int		set_mode(char **mode, char *str);

@@ -75,7 +75,7 @@ int	main(int argc, char **argv)
 {
 	t_stack	*whole_stack;
 	t_stack	*whole_stack_b;
-	t_logs	log;
+	t_logs	logs;
 	char	*mode;
 
 	if (argc == 1)
@@ -83,16 +83,17 @@ int	main(int argc, char **argv)
 		printf("Invalid arguments"); /*debugging*/
 		return (1);
 	}
-	init(&whole_stack, &whole_stack_b, &log, &mode);
+	init(&whole_stack, &whole_stack_b, &logs, &mode);
 	if (!parse_args(argc, argv, &whole_stack, &mode))
 	{
 		printf("Invalid arguments"); /*debugging*/
 		return (1);
 	}
 	/*debugging and testing*/
-	printf("%s\n", mode);
+	printf("mode: %s\n", mode);
 	printf("disorder before : %f\n", comput_disorader(&whole_stack));
-	bubble_sort_list(&whole_stack, &log);
+	insertion_sort_list(&whole_stack, &whole_stack_b, &logs);
+	//bubble_sort_list(&whole_stack, &log);
 	print_list(whole_stack);
 	printf("disorder after : %f\n", comput_disorader(&whole_stack));
 	return (0);

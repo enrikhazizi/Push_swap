@@ -26,8 +26,8 @@ void	push_front(t_stack **stack, t_stack *node)
 		*stack = node;
 		return ;
 	}
-	tail = head->prev;
 	head = *stack;
+	tail = head->prev;
 	node->next = head;
 	head->prev = node;
 	node->prev = tail;
