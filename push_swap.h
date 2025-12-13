@@ -79,5 +79,5 @@ int		ft_atoi_strict(const char *str, int *out);
 int		not_has_dupes(t_stack **stack_a);
 void	init(t_stack **whole_stack, t_stack **whole_stack_b, t_logs *logs,
 			char **mode);
-
+void	chunk_sort_list(t_stack **stack_a, t_stack **stack_b, t_logs *logs);
 #endif
