@@ -36,31 +36,6 @@ void	push_front(t_stack **stack, t_stack *node)
 	return ;
 }
 
-float	comput_disorader(t_stack **stack)
-{
-	float	mistakes;
-	float	total_pairs;
-	t_stack	*i;
-	t_stack	*j;
-
-	mistakes = 0;
-	total_pairs = 0;
-	i = (*stack);
-	while (i->next != (*stack))
-	{
-		j = i->next;
-		while (j->next != (*stack))
-		{
-			total_pairs++;
-			if (i->data > j->data)
-				mistakes++;
-			j = j->next;
-		}
-		i = i->next;
-	}
-	return (mistakes / total_pairs);
-}
-
 int	get_max(t_stack **node)
 {
 	int		i;
@@ -106,4 +81,32 @@ void	free_split(char **token)
 		i++;
 	}
 	free(token);
+}
+
+int	ft_atoi_strict(const char *str, int *out)
+{
+	long	num;
+	int		sign;
+
+	num = 0;
+	sign = 1;
+	if (*str == '+' || *str == '-')
+	{
+		if (*str == '-')
+			sign = -1;
+		str++;
+	}
+	if (*str == '\0')
+		return (0);
+	while (*str)
+	{
+		if (*str < '0' || *str > '9')
+			return (0);
+		num = num * 10 + (*str - '0');
+		if ((num * sign) > 2147483647 || (num * sign) < -2147483648)
+			return (0);
+		str++;
+	}
+	*out = (int)(num * sign);
+	return (1);
 }

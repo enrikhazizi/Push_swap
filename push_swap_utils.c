@@ -66,3 +66,38 @@ t_stack	*pop_head(t_stack **stack)
 	*stack = new_head;
 	return (head);
 }
+
+static void	compute_disorder_inner(t_stack *i_node, t_stack **j_node,
+	size_t *total_pairs, size_t *mistakes)
+{
+	(*total_pairs)++;
+	if (i_node->data > (*j_node)->data)
+		(*mistakes)++;
+	*j_node = (*j_node)->next;
+}
+
+double	compute_disorder(t_stack *first)
+{
+	t_stack	*i_node;
+	t_stack	*j_node;
+	size_t	total_pairs;
+	size_t	mistakes;
+
+	if (!first || first->next == first)
+		return (0.0);
+	total_pairs = 0;
+	mistakes = 0;
+	i_node = first;
+	while (1)
+	{
+		j_node = i_node->next;
+		while (j_node != first)
+			compute_disorder_inner(i_node, &j_node, &total_pairs, &mistakes);
+		i_node = i_node->next;
+		if (i_node == first)
+			break ;
+	}
+	if (total_pairs == 0)
+		return (0.0);
+	return ((double)mistakes / (double)total_pairs);
+}

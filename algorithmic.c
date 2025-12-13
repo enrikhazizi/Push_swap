@@ -12,6 +12,7 @@
 
 #include "push_swap.h"
 
+/*problem when testing with 2 elements*/
 void	bubble_sort_list(t_stack **stack, t_logs *logs)
 {
 	int	i;
