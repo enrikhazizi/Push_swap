@@ -34,6 +34,7 @@ void	swap_a(t_stack **stack, t_logs *logs)
 	logs->sa++;
 	logs->total++;
 	*stack = second;
+	log_moves(logs, "sa");
 }
 
 void	push_a(t_stack **stack_a, t_stack **stack_b, t_logs *log)
@@ -46,16 +47,19 @@ void	push_a(t_stack **stack_a, t_stack **stack_b, t_logs *log)
 	push_front(stack_a, node);
 	log->pa++;
 	log->total++;
+	log_moves(log, "pa");
 }
 
 void	rotate_a(t_stack **stack, t_logs *logs)
 {
 	*stack = (*stack)->next;
 	logs->total++;
+	log_moves(logs, "ra");
 }
 
 void	rrotate_a(t_stack **stack, t_logs *logs)
 {
 	*stack = (*stack)->prev;
 	logs->total++;
+	log_moves(logs, "rra");
 }

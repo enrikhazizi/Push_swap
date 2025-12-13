@@ -21,8 +21,8 @@
 
 typedef struct s_moves
 {
-	char			data;
-	struct moves	*next;
+	char			*data;
+	struct s_moves	*next;
 }	t_moves;
 
 typedef struct s_stack
@@ -79,5 +79,8 @@ int		ft_atoi_strict(const char *str, int *out);
 int		not_has_dupes(t_stack **stack_a);
 void	init(t_stack **whole_stack, t_stack **whole_stack_b, t_logs *logs,
 			char **mode);
+void	log_moves(t_logs *log, char *data);
+t_moves	*new_move(char *data);
+void print_moves(t_logs *logs);
 
 #endif
