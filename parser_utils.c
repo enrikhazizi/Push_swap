@@ -57,6 +57,7 @@ int	create_from_single(char *str, t_stack **whole_stack)
 {
 	char	**token;
 	int		i;
+	int		num;
 
 	i = 0;
 	token = ft_split(str, ' ');
@@ -64,22 +65,26 @@ int	create_from_single(char *str, t_stack **whole_stack)
 		return (0);
 	while (token[i])
 	{
-		create_list(whole_stack, ft_atoi(token[i]));
+		if (!ft_atoi_strict(token[i], &num))
+			return (0);
+		create_list(whole_stack, num);
 		++i;
 	}
 	free_split(token);
 	return (1);
 }
 
-/*TODO: add a check for arguments before atoing them*/
 int	create_from_multi(char **ptr, t_stack **whole_stack)
 {
 	int	i;
+	int	num;
 
 	i = 0;
 	while (ptr[i])
 	{
-		create_list(whole_stack, ft_atoi(ptr[i]));
+		if (!ft_atoi_strict(ptr[i], &num))
+			return (0);
+		create_list(whole_stack, num);
 		++i;
 	}
 	return (1);

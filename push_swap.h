@@ -13,7 +13,7 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include <stdio.h>
+# include <stdio.h> //for testing only
 # include <unistd.h>
 # include <stdlib.h>
 # include <stddef.h>
@@ -61,7 +61,6 @@ void	rotate_a(t_stack **stack, t_logs *logs);
 void	rotate_b(t_stack **stack, t_logs *logs);
 void	rrotate_b(t_stack **stack, t_logs *logs);
 void	rrotate_a(t_stack **stack, t_logs *logs);
-float	comput_disorader(t_stack **stack);
 int		get_max(t_stack **node);
 void	bubble_sort_list(t_stack **stack, t_logs *logs);
 void	insertion_sort_list(t_stack **stack_a, t_stack **stack_b, t_logs *logs);
@@ -73,7 +72,12 @@ int		create_from_single(char *str, t_stack **whole_stack);
 int		create_from_multi(char **ptr, t_stack **whole_stack);
 int		parse_args(int argc, char **argv, t_stack **whole_stack, char **mode);
 void	create_list(t_stack **stack, int data);
-void	init(t_stack **whole_stack, t_stack **whole_stack_b, t_logs *log,
+int		choose_algorithm(char *mode, t_stack **stack_a, t_stack **stack_b,
+			t_logs *logs);
+int		ft_strcmp(char *s1, char *s2);
+int		ft_atoi_strict(const char *str, int *out);
+int		not_has_dupes(t_stack **stack_a);
+void	init(t_stack **whole_stack, t_stack **whole_stack_b, t_logs *logs,
 			char **mode);
 
 #endif

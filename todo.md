@@ -1,16 +1,16 @@
 # To Do
 - Add libft -- done
 - Make parsing -- done
-    things to consider that are not implemented yet: 
+    things to consider that are not implemented yet: -- done
         • If no parameters are specified, the program must not display anything and give the prompt
-        back.
+        back.  -- done
         • In case of error, it must display "Error" followed by a \n on the standard error. Errors
         include, for example: arguments that are not integers, integers outside the valid range, or
-        duplicate values.
+        duplicate values. -- done
 - Make compute disorder function -- done
 - Make anothe simple algorithm -- insertion sort done
 
 - Make medium algorithm
 - Make complex algorithm
 - Print or log all the operations
-- Optimize and simplify the operationsc
+- Optimize and simplify the operations

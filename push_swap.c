@@ -62,13 +62,38 @@ int	parse_args(int argc, char **argv, t_stack **whole_stack, char **mode)
 	return (0);
 }
 
-void	init(t_stack **whole_stack, t_stack **whole_stack_b, t_logs *log,
-		char **mode)
+int	choose_algorithm(char *mode, t_stack **stack_a, t_stack **stack_b,
+	t_logs *logs)
 {
-	init_log(log);
-	*whole_stack_b = NULL;
-	*whole_stack = NULL;
-	*mode = "--adaptive";
+	float	disorder;
+
+	printf("mode: %s\n", mode); //debug
+	disorder = compute_disorder(*stack_a);
+	if (ft_strcmp(mode, "--simple") == 0)
+		bubble_sort_list(stack_a, logs);
+	else if (ft_strcmp(mode, "--medium") == 0)
+		bubble_sort_list(stack_a, logs); //replace with medium algo
+	else if (ft_strcmp(mode, "--complex") == 0)
+		bubble_sort_list(stack_a, logs); //replace with complex algo
+	else if (ft_strcmp(mode, "--adaptive") == 0)
+	{
+		if (disorder < 0.2)
+			bubble_sort_list(stack_a, logs);
+		else if (disorder < 0.5)
+			bubble_sort_list(stack_a, logs); //replace with medium algo
+		else
+			bubble_sort_list(stack_a, logs); //replace with complex algo
+	}
+	else
+		return (0);
+	print_list(*stack_a); //debug
+	return (1);
+}
+
+static int	print_error(void)
+{
+	write(2, "Error\n", 6);
+	return (1);
 }
 
 int	main(int argc, char **argv)
@@ -79,22 +104,15 @@ int	main(int argc, char **argv)
 	char	*mode;
 
 	if (argc == 1)
-	{
-		printf("Invalid arguments"); /*debugging*/
-		return (1);
-	}
+		return (0);
 	init(&whole_stack, &whole_stack_b, &logs, &mode);
 	if (!parse_args(argc, argv, &whole_stack, &mode))
-	{
-		printf("Invalid arguments"); /*debugging*/
-		return (1);
-	}
-	/*debugging and testing*/
-	printf("mode: %s\n", mode);
-	printf("disorder before : %f\n", comput_disorader(&whole_stack));
-	insertion_sort_list(&whole_stack, &whole_stack_b, &logs);
-	//bubble_sort_list(&whole_stack, &log);
-	print_list(whole_stack);
-	printf("disorder after : %f\n", comput_disorader(&whole_stack));
+		return (print_error());
+	if (!not_has_dupes(&whole_stack))
+		return (print_error());
+	if (compute_disorder(whole_stack) == 0)
+		return (0);
+	if (!choose_algorithm(mode, &whole_stack, &whole_stack_b, &logs))
+		return (print_error());
 	return (0);
 }
