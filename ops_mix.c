@@ -16,10 +16,16 @@ void	rotate_r(t_stack **stack_a, t_stack **stack_b, t_logs *logs)
 {
 	*stack_a = (*stack_a)->next;
 	*stack_b = (*stack_b)->next;
+	logs->rr++;
+	logs->total++;
+	log_moves(logs, "rr");
 }
 
 void	rrotate_r(t_stack **stack_a, t_stack **stack_b, t_logs *logs)
 {
 	*stack_a = (*stack_a)->prev;
 	*stack_b = (*stack_b)->prev;
+	logs->rrr++;
+	logs->total++;
+	log_moves(logs, "rrr");
 }

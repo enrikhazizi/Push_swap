@@ -114,5 +114,6 @@ int	main(int argc, char **argv)
 		return (0);
 	if (!choose_algorithm(mode, &whole_stack, &whole_stack_b, &logs))
 		return (print_error());
+	print_moves(&logs);
 	return (0);
 }

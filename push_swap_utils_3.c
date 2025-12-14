@@ -48,3 +48,43 @@ int	not_has_dupes(t_stack **stack_a)
 	}
 	return (1);
 }
+
+t_moves	*new_move(char *data)
+{
+	t_moves	*node;
+
+	node = malloc(sizeof(t_moves));
+	if (!node)
+		return (NULL);
+	node->data = data;
+	node->next = NULL;
+	return node;	
+}
+
+void log_moves(t_logs *log, char *data)
+{
+	t_moves *tmp;
+	t_moves *new;
+
+	new = new_move(data);
+	if (!new)
+		return ;
+	if (!log->list)
+		log->list = new;
+	else
+	{
+		tmp = log->list;
+		while(tmp->next)
+			tmp = tmp->next;
+		tmp->next = new;
+	}
+}
+
+void print_moves(t_logs *logs)
+{
+	while(logs->list)
+	{
+		printf("%s\n" , logs->list->data);
+		logs->list = logs->list->next;
+	}
+}
