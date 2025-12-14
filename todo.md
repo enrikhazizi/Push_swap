@@ -10,7 +10,7 @@
 - Make compute disorder function -- done
 - Make anothe simple algorithm -- insertion sort done
 
-- Make medium algorithm
+- Make medium algorithm -- done chunk sort
 - Make complex algorithm
 - Print or log all the operations -done
     things to consider it uses printf must be ecxhange with ft_printf 

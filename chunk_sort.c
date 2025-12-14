@@ -12,99 +12,6 @@
 
 #include "push_swap.h"
 
-int	get_sqrt(double x)
-{
-	double	guess;
-	double	epsilon;
-	int		root_int;
-
-	if (x < 0)
-		return (-1);
-	if (x == 0)
-		return (0);
-	guess = x / 2.0;
-	epsilon = 1e-6;
-	while ((guess * guess - x) > epsilon || (guess * guess - x) < -epsilon)
-		guess = (guess + x / guess) / 2.0;
-	root_int = (int)guess;
-	if (root_int * root_int < x)
-		root_int++;
-	return (root_int);
-}
-
-void	bubble_sort_array(int *data, int size)
-{
-	int	i;
-	int	j;
-	int	tmp;
-
-	i = 0;
-	while (i < size - 1)
-	{
-		j = i + 1;
-		while (j < size)
-		{
-			if (data[j] < data[i])
-			{
-				tmp = data[i];
-				data[i] = data[j];
-				data[j] = tmp;
-			}
-			++j;
-		}
-		++i;
-	}
-}
-
-void	index_data(t_stack **stack_a, int *data, int size)
-{
-	int		i;
-	int		j;
-	t_stack	*ptr;
-
-	i = 0;
-	ptr = *stack_a;
-	while (i < size)
-	{
-		j = 0;
-		while (j < size)
-		{
-			if (ptr->data == data[j])
-			{
-				ptr->data = j;
-				break ;
-			}
-			++j;
-		}
-		++i;
-		ptr = ptr->next;
-	}
-}
-
-void	normalize_data(t_stack **stack_a)
-{
-	int 	*data;
-	int 	size;
-	int		i;
-	t_stack	*ptr;
-
-	i = 0;
-	ptr = *stack_a;
-	size = get_list_size(*stack_a);
-	data = malloc(sizeof(int) * size);
-	if (!data)
-		return ;
-	while (i < size)
-	{
-		data[i] = ptr->data;
-		ptr = ptr->next;
-		++i;
-	}
-	bubble_sort_array(data, size);
-	index_data(stack_a, data, size);
-	free(data);
-}
-
 static void	chunks_to_b(t_stack **stack_a, t_stack **stack_b,
 						int elements_per_chunk, t_logs *logs)
 {
@@ -130,19 +37,60 @@ static void	chunks_to_b(t_stack **stack_a, t_stack **stack_b,
 	}
 }
 
+static void	find_and_push(int index, t_stack **b, t_stack **a, t_logs *logs)
+{
+	int	size;
+
+	size = get_list_size(*b);
+	if (index <= size / 2)
+	{
+		while (index-- > 0)
+			rotate_b(b, logs);
+	}
+	else
+	{
+		index = size - index;
+		while (index-- > 0)
+			rrotate_b(b, logs);
+	}
+	push_a(a, b, logs);
+}
+
+static int	search_index(t_stack **stack_b, int target)
+{
+	t_stack	*ptr;
+	int		i;
+	int		size;
+
+	size = get_list_size(*stack_b);
+	i = 0;
+	ptr = *stack_b;
+	while (i < size)
+	{
+		if (ptr->data == target)
+			return (i);
+		ptr = ptr->next;
+		i++;
+	}
+	return (-1);
+}
+
 void	chunk_sort_list(t_stack **stack_a, t_stack **stack_b, t_logs *logs)
 {
 	int	size;
 	int	chunk_nr;
-	int	elements_per_chunk;
-	int	bottom;
+	int	total_elements_per_chunk;
 	int	i;
-	t_stack	*ptr;
 
 	normalize_data(stack_a);
 	size = get_list_size(*stack_a);
 	chunk_nr = get_sqrt(size);
-	elements_per_chunk = (size + chunk_nr - 1) / chunk_nr;
-	chunks_to_b(stack_a, stack_b, elements_per_chunk, logs);
-	print_list(*stack_b);
+	total_elements_per_chunk = (size + chunk_nr - 1) / chunk_nr;
+	chunks_to_b(stack_a, stack_b, total_elements_per_chunk, logs);
+	while (*stack_b)
+	{
+		size = get_list_size(*stack_b);
+		i = search_index(stack_b, size - 1);
+		find_and_push(i, stack_b, stack_a, logs);
+	}
 }
