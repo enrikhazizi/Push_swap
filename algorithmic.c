@@ -6,7 +6,7 @@
 /*   By: ehazizi <ehazizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 17:12:59 by ehazizi           #+#    #+#             */
-/*   Updated: 2025/12/10 17:34:59 by ehazizi          ###   ########.fr       */
+/*   Updated: 2025/12/15 14:36:57 by ehazizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,18 @@ void	bubble_sort_list(t_stack **stack, t_logs *logs)
 	int	j;
 	int	size;
 
+	if (!stack || !*stack )
+		return ;
+
 	i = 0;
 	size = get_list_size(*stack);
+	if (size == 2)
+	{
+		if ((*stack)->data > (*stack)->next->data)
+			swap_a(stack, logs);
+		return ;
+	}
+
 	while (i < size - 1)
 	{
 		j = 0;

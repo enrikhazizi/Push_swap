@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_utils_3.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fqose <fqose@student.42.fr>                #+#  +:+       +#+        */
+/*   By: ehazizi <ehazizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-12-13 07:39:16 by fqose             #+#    #+#             */
-/*   Updated: 2025-12-13 07:39:16 by fqose            ###   ########.al       */
+/*   Created: 2025/12/13 07:39:16 by fqose             #+#    #+#             */
+/*   Updated: 2025/12/15 14:20:20 by ehazizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	print_moves(t_logs *logs)
 {
 	while (logs->list)
 	{
-		printf("%s\n", logs->list->data);
+		ft_printf("%s\n", logs->list->data);
 		logs->list = logs->list->next;
 	}
 }

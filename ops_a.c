@@ -6,7 +6,7 @@
 /*   By: ehazizi <ehazizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 16:49:45 by ehazizi           #+#    #+#             */
-/*   Updated: 2025/12/10 17:13:41 by ehazizi          ###   ########.fr       */
+/*   Updated: 2025/12/15 15:08:41 by ehazizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,23 @@ void	swap_a(t_stack **stack, t_logs *logs)
 		return ;
 	head = *stack;
 	second = head->next;
-	tail = head->prev;
+	
+	if (second->next == head)
+	{
+		*stack = second;
+		logs->sa++;
+		logs->total++;
+		log_moves(logs, "sa");
+		return ;
+	}
 	third = second->next;
+	tail = head->prev;
 	tail->next = second;
 	second->prev = tail;
+	head->next = third;
+	third->prev = head;
 	second->next = head;
 	head->prev = second;
-	third->prev = head;
-	head->next = third;
 	logs->sa++;
 	logs->total++;
 	*stack = second;

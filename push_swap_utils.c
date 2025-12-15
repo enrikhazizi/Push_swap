@@ -6,7 +6,7 @@
 /*   By: ehazizi <ehazizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 16:49:52 by ehazizi           #+#    #+#             */
-/*   Updated: 2025/12/10 17:18:58 by ehazizi          ###   ########.fr       */
+/*   Updated: 2025/12/15 14:26:50 by ehazizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,14 @@ void	print_list(t_stack *stack)
 
 	if (!stack)
 		return ;
-	printf("List forward: \n");
-	printf("%d\n", stack->data);
-	cur = stack->next;
-	while (cur != stack)
+	printf("List ->:\n");
+	cur = stack;
+	do
 	{
-		printf("%d\n", cur->data);
+		ft_printf("%d\n", cur->data);
 		cur = cur->next;
-	}
-	printf("\n");
+	}while (cur != stack);
+	ft_printf("\n");
 }
 
 void	init_log(t_logs *log)
