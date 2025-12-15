@@ -35,19 +35,19 @@ void	create_list(t_stack **stack, int data)
 	last_node->next = new_node;
 }
 
-int	parse_args(int argc, char **argv, t_stack **whole_stack, char **mode)
+int	parse_args(int argc, char **argv, t_stack **stack_a, char **mode)
 {
 	if (argc == 2 && is_nr(argv[1]))
-		return (create_from_single(argv[1], whole_stack));
+		return (create_from_single(argv[1], stack_a));
 	else if (argc == 3)
 	{
 		if (!is_nr(argv[1]))
 		{
 			if (!set_mode(mode, argv[1]))
 				return (0);
-			return (create_from_single(argv[2], whole_stack));
+			return (create_from_single(argv[2], stack_a));
 		}
-		return (create_from_multi(argv + 1, whole_stack));
+		return (create_from_multi(argv + 1, stack_a));
 	}
 	else if (argc > 3)
 	{
@@ -55,9 +55,9 @@ int	parse_args(int argc, char **argv, t_stack **whole_stack, char **mode)
 		{
 			if (!set_mode(mode, argv[1]))
 				return (0);
-			return (create_from_multi(argv + 2, whole_stack));
+			return (create_from_multi(argv + 2, stack_a));
 		}
-		return (create_from_multi(argv + 1, whole_stack));
+		return (create_from_multi(argv + 1, stack_a));
 	}
 	return (0);
 }
@@ -72,7 +72,7 @@ int	choose_algorithm(char *mode, t_stack **stack_a, t_stack **stack_b,
 	if (ft_strcmp(mode, "--simple") == 0)
 		bubble_sort_list(stack_a, logs);
 	else if (ft_strcmp(mode, "--medium") == 0)
-		bubble_sort_list(stack_a, logs); //replace with medium algo
+		chunk_sort_list(stack_a, stack_b, logs);
 	else if (ft_strcmp(mode, "--complex") == 0)
 		bubble_sort_list(stack_a, logs); //replace with complex algo
 	else if (ft_strcmp(mode, "--adaptive") == 0)
@@ -80,13 +80,14 @@ int	choose_algorithm(char *mode, t_stack **stack_a, t_stack **stack_b,
 		if (disorder < 0.2)
 			bubble_sort_list(stack_a, logs);
 		else if (disorder < 0.5)
-			bubble_sort_list(stack_a, logs); //replace with medium algo
+			chunk_sort_list(stack_a, stack_b, logs);
 		else
 			bubble_sort_list(stack_a, logs); //replace with complex algo
 	}
 	else
 		return (0);
 	print_list(*stack_a); //debug
+	printf("total ops: %d\n", logs->total); //debug;
 	return (1);
 }
 
@@ -98,21 +99,21 @@ static int	print_error(void)
 
 int	main(int argc, char **argv)
 {
-	t_stack	*whole_stack;
-	t_stack	*whole_stack_b;
+	t_stack	*stack_a;
+	t_stack	*stack_b;
 	t_logs	logs;
 	char	*mode;
 
 	if (argc == 1)
 		return (0);
-	init(&whole_stack, &whole_stack_b, &logs, &mode);
-	if (!parse_args(argc, argv, &whole_stack, &mode))
+	init(&stack_a, &stack_b, &logs, &mode);
+	if (!parse_args(argc, argv, &stack_a, &mode))
 		return (print_error());
-	if (!not_has_dupes(&whole_stack))
+	if (!not_has_dupes(&stack_a))
 		return (print_error());
-	if (compute_disorder(whole_stack) == 0)
+	if (compute_disorder(stack_a) == 0)
 		return (0);
-	if (!choose_algorithm(mode, &whole_stack, &whole_stack_b, &logs))
+	if (!choose_algorithm(mode, &stack_a, &stack_b, &logs))
 		return (print_error());
 	print_moves(&logs);
 	return (0);

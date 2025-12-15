@@ -79,8 +79,13 @@ int		ft_atoi_strict(const char *str, int *out);
 int		not_has_dupes(t_stack **stack_a);
 void	init(t_stack **whole_stack, t_stack **whole_stack_b, t_logs *logs,
 			char **mode);
-void	log_moves(t_logs *log, char *data);
+void	chunk_sort_list(t_stack **stack_a, t_stack **stack_b, t_logs *logs);
 t_moves	*new_move(char *data);
-void print_moves(t_logs *logs);
+void	print_moves(t_logs *logs);
+void	log_moves(t_logs *log, char *data);
+int		get_sqrt(double x);
+void	bubble_sort_array(int *data, int size);
+void	index_data(t_stack **stack_a, int *data, int size);
+void	normalize_data(t_stack **stack_a);
 
 #endif

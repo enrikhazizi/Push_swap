@@ -58,13 +58,13 @@ t_moves	*new_move(char *data)
 		return (NULL);
 	node->data = data;
 	node->next = NULL;
-	return node;	
+	return (node);
 }
 
-void log_moves(t_logs *log, char *data)
+void	log_moves(t_logs *log, char *data)
 {
-	t_moves *tmp;
-	t_moves *new;
+	t_moves	*tmp;
+	t_moves	*new;
 
 	new = new_move(data);
 	if (!new)
@@ -74,17 +74,17 @@ void log_moves(t_logs *log, char *data)
 	else
 	{
 		tmp = log->list;
-		while(tmp->next)
+		while (tmp->next)
 			tmp = tmp->next;
 		tmp->next = new;
 	}
 }
 
-void print_moves(t_logs *logs)
+void	print_moves(t_logs *logs)
 {
-	while(logs->list)
+	while (logs->list)
 	{
-		printf("%s\n" , logs->list->data);
+		printf("%s\n", logs->list->data);
 		logs->list = logs->list->next;
 	}
 }
