@@ -85,57 +85,59 @@ int	find_place_a(t_stack **stack_a, t_stack *el, int size)
 	return (find_min_index(stack_a, size));
 }
 
-void	calc_strategy(t_element *el)
+void	calc_strategy_part1(t_element *el, int *rr, int *rrr, t_costs *costs)
 {
-	int	rr;
-	int	rrr;
-	int	cost_rr;
-	int	cost_rrr;
-	int	cost_ra_rrb;
-	int	cost_rra_rb;
-
-	rr = min(el->ra, el->rb);
-	rrr = min(el->rra, el->rrb);
-	cost_rr = max(el->ra, el->rb);
-	cost_rrr = max(el->rra, el->rrb);
-	cost_ra_rrb = el->ra + el->rrb;
-	cost_rra_rb = el->rra + el->rb;
+	*rr = min(el->ra, el->rb);
+	*rrr = min(el->rra, el->rrb);
+	costs->cost_rr = max(el->ra, el->rb);
+	costs->cost_rrr = max(el->rra, el->rrb);
+	costs->cost_ra_rrb = el->ra + el->rrb;
+	costs->cost_rra_rb = el->rra + el->rb;
 	el->strategy = RR;
-	el->total = cost_rr;
-	if (cost_rrr < el->total)
+	el->total = costs->cost_rr;
+	if (costs->cost_rrr < el->total)
 	{
 		el->strategy = RRR;
-		el->total = cost_rrr;
+		el->total = costs->cost_rrr;
 	}
-	if (cost_ra_rrb < el->total)
+	if (costs->cost_ra_rrb < el->total)
 	{
 		el->strategy = RA_RRB;
-		el->total = cost_ra_rrb;
+		el->total = costs->cost_ra_rrb;
 	}
-	if (cost_rra_rb < el->total)
+	if (costs->cost_rra_rb < el->total)
 	{
 		el->strategy = RRA_RB;
-		el->total = cost_rra_rb;
+		el->total = costs->cost_rra_rb;
 	}
+}
+
+void	calc_strategy_part2(t_element *el, int *rr, int *rrr)
+{
 	el->rr = 0;
 	el->rrr = 0;
+
 	if (el->strategy == RR)
 	{
-		el->rr = rr;
-		el->ra -= rr;
-		el->rb -= rr;
+		el->rr = *rr;
+		el->ra -= *rr;
+		el->rb -= *rr;
 		el->rra = 0;
 		el->rrb = 0;
 	}
 	else if (el->strategy == RRR)
 	{
-		el->rrr = rrr;
-		el->rra -= rrr;
-		el->rrb -= rrr;
+		el->rrr = *rrr;
+		el->rra -= *rrr;
+		el->rrb -= *rrr;
 		el->ra = 0;
 		el->rb = 0;
 	}
-	else if (el->strategy == RA_RRB)
+}
+
+void	calc_strategy_part3(t_element *el)
+{
+	if (el->strategy == RA_RRB)
 	{
 		el->rra = 0;
 		el->rb = 0;
@@ -145,6 +147,17 @@ void	calc_strategy(t_element *el)
 		el->ra = 0;
 		el->rrb = 0;
 	}
+}
+
+void	calc_strategy(t_element *el)
+{
+	int		rr;
+	int		rrr;
+	t_costs	costs;
+
+	calc_strategy_part1(el, &rr, &rrr, &costs);
+	calc_strategy_part2(el, &rr, &rrr);
+	calc_strategy_part3(el);
 }
 
 void	find_efficient_el(t_stack **stack_a, t_stack **stack_b,
@@ -175,7 +188,6 @@ void	find_efficient_el(t_stack **stack_a, t_stack **stack_b,
 		calc_strategy(&tmp);
 		if (tmp.total < best->total)
 			*best = tmp;
-
 		cur_b = cur_b->next;
 		i++;
 	}

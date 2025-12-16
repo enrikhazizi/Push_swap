@@ -68,6 +68,14 @@ typedef struct s_element
 	t_strategy	strategy;
 }	t_element;
 
+typedef struct s_costs
+{
+	int	cost_rr;
+	int	cost_rrr;
+	int	cost_ra_rrb;
+	int	cost_rra_rb;
+}	t_costs;
+
 double	compute_disorder(t_stack *first);
 void	print_list(t_stack *stack);
 void	swap_a(t_stack **stack, t_logs *logs);

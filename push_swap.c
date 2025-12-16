@@ -86,7 +86,6 @@ int	choose_algorithm(char *mode, t_stack **stack_a, t_stack **stack_b,
 	}
 	else
 		return (0);
-	printf("total ops: %d\n", logs->total); //debug;
 	return (1);
 }
 
@@ -114,6 +113,7 @@ int	main(int argc, char **argv)
 		return (0);
 	if (!choose_algorithm(mode, &stack_a, &stack_b, &logs))
 		return (print_error());
-	//print_moves(&logs);
+	print_moves(&logs);
+	printf("total ops: %d\n", logs->total); //debug;
 	return (0);
 }
