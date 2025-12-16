@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fqose <fqose@student.42.fr>                #+#  +:+       +#+        */
+/*   By: ehazizi <ehazizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-10-15 15:30:22 by fqose             #+#    #+#             */
-/*   Updated: 2025-10-15 15:30:22 by fqose            ###   ########.fr       */
+/*   Created: 2025/10/15 15:30:22 by fqose             #+#    #+#             */
+/*   Updated: 2025/12/15 14:19:51 by ehazizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stddef.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include "ft_printf.h"
 
 typedef struct s_split_data
 {

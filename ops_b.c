@@ -6,7 +6,7 @@
 /*   By: ehazizi <ehazizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 16:49:40 by ehazizi           #+#    #+#             */
-/*   Updated: 2025/12/10 17:13:44 by ehazizi          ###   ########.fr       */
+/*   Updated: 2025/12/15 15:08:47 by ehazizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,17 @@ void	swap_b(t_stack **stack, t_logs *logs)
 
 	if (!stack || !(*stack) || !(*stack)->next)
 		return ;
+
 	head = *stack;
 	second = head->next;
+	if (second->next == head)
+	{
+		*stack = second;
+		logs->sa++;
+		logs->total++;
+		log_moves(logs, "sa");
+		return ;
+	}
 	tail = head->prev;
 	third = second->next;
 	tail->next = second;
