@@ -113,8 +113,9 @@ int	main(int argc, char **argv)
 		return (print_error());
 	if (compute_disorder(stack_a) == 0)
 		return (0);
-	if (!choose_algorithm(mode, &stack_a, &stack_b, &logs))
-		return (print_error());
+	// if (!choose_algorithm(mode, &stack_a, &stack_b, &logs))
+	// 	return (print_error());
+	greedy_chunk_sort(&stack_a, &stack_b, &logs);
 	print_moves(&logs);
 	return (0);
 }

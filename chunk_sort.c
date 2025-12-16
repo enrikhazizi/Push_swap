@@ -6,13 +6,13 @@
 /*   By: fqose <fqose@student.42.fr>                #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025-12-13 10:10:22 by fqose             #+#    #+#             */
-/*   Updated: 2025-12-13 10:10:22 by fqose            ###   ########.fr       */
+/*   Updated: 2025-12-13 10:10:22 by fqose            ###   ########.al       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	chunks_to_b(t_stack **stack_a, t_stack **stack_b,
+void	chunks_to_b(t_stack **stack_a, t_stack **stack_b,
 						int elements_per_chunk, t_logs *logs)
 {
 	int	bottom;

@@ -48,6 +48,26 @@ typedef struct s_logs
 	int		total;
 }	t_logs;
 
+typedef enum e_strategy{
+	FF,
+	BB,
+	FB,
+	BF
+}	t_strategy;
+
+typedef struct s_element
+{
+	t_stack		*element;
+	int			ra;
+	int			rra;
+	int			rb;
+	int			rrb;
+	int			rr;
+	int			rrr;
+	int			total;
+	t_strategy	strategy;
+}	t_element;
+
 double	compute_disorder(t_stack *first);
 void	print_list(t_stack *stack);
 void	swap_a(t_stack **stack, t_logs *logs);
@@ -87,5 +107,10 @@ int		get_sqrt(double x);
 void	bubble_sort_array(int *data, int size);
 void	index_data(t_stack **stack_a, int *data, int size);
 void	normalize_data(t_stack **stack_a);
+void    greedy_chunk_sort(t_stack **stack_a, t_stack **stack_b, t_logs *logs);
+void	rotate_r(t_stack **stack_a, t_stack **stack_b, t_logs *logs);
+void	rrotate_r(t_stack **stack_a, t_stack **stack_b, t_logs *logs);
+void	chunks_to_b(t_stack **stack_a, t_stack **stack_b,
+			int elements_per_chunk, t_logs *logs);
 
 #endif
