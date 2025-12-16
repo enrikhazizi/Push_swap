@@ -49,10 +49,10 @@ typedef struct s_logs
 }	t_logs;
 
 typedef enum e_strategy{
-	FF,
-	BB,
-	FB,
-	BF
+	RR,
+	RRR,
+	RRA_RB,
+	RA_RRB
 }	t_strategy;
 
 typedef struct s_element

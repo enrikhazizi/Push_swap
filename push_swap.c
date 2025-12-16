@@ -74,7 +74,7 @@ int	choose_algorithm(char *mode, t_stack **stack_a, t_stack **stack_b,
 	else if (ft_strcmp(mode, "--medium") == 0)
 		chunk_sort_list(stack_a, stack_b, logs);
 	else if (ft_strcmp(mode, "--complex") == 0)
-		bubble_sort_list(stack_a, logs); //replace with complex algo
+		greedy_chunk_sort(stack_a, stack_b, logs);
 	else if (ft_strcmp(mode, "--adaptive") == 0)
 	{
 		if (disorder < 0.2)
@@ -82,11 +82,10 @@ int	choose_algorithm(char *mode, t_stack **stack_a, t_stack **stack_b,
 		else if (disorder < 0.5)
 			chunk_sort_list(stack_a, stack_b, logs);
 		else
-			bubble_sort_list(stack_a, logs); //replace with complex algo
+			greedy_chunk_sort(stack_a, stack_b, logs);
 	}
 	else
 		return (0);
-	print_list(*stack_a); //debug
 	printf("total ops: %d\n", logs->total); //debug;
 	return (1);
 }
@@ -113,9 +112,8 @@ int	main(int argc, char **argv)
 		return (print_error());
 	if (compute_disorder(stack_a) == 0)
 		return (0);
-	// if (!choose_algorithm(mode, &stack_a, &stack_b, &logs))
-	// 	return (print_error());
-	greedy_chunk_sort(&stack_a, &stack_b, &logs);
-	print_moves(&logs);
+	if (!choose_algorithm(mode, &stack_a, &stack_b, &logs))
+		return (print_error());
+	//print_moves(&logs);
 	return (0);
 }
