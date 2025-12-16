@@ -9,14 +9,14 @@ Implement at least one baseline algorithm in the O(n2) class. Examples include:
 • Bubble sort adaptation --SELECTED
 • Simple min/max extraction methods
 
-2. Medium algorithm (O(n√n)):
+2. Medium algorithm (O(n√n)): --DONE
 Implement at least one algorithm in the O(n√n) class. Examples include:
 • Chunk-based sorting (divide into √n chunks)
 • Block-based partitioning methods
 • Bucket sort adaptations with √n buckets
 • Range-based sorting strategies
 
-3. Complex algorithm (O(n log n)):
+3. Complex algorithm (O(n log n)): --DONE
 Implement at least one algorithm in the O(n log n) class. Examples include:
 • Radix sort adaptation (LSD or MSD)
 • Merge sort adaptation using two stacks

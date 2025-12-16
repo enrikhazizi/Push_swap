@@ -12,15 +12,10 @@
 
 #include "push_swap.h"
 
-void	swap_b(t_stack **stack, t_logs *logs)
+int	handle_two_el(t_stack **stack, t_logs *logs)
 {
 	t_stack	*head;
 	t_stack	*second;
-	t_stack	*tail;
-	t_stack	*third;
-
-	if (!stack || !(*stack) || !(*stack)->next)
-		return ;
 
 	head = *stack;
 	second = head->next;
@@ -30,8 +25,24 @@ void	swap_b(t_stack **stack, t_logs *logs)
 		logs->sa++;
 		logs->total++;
 		log_moves(logs, "sa");
-		return ;
+		return (1);
 	}
+	return (0);
+}
+
+void	swap_b(t_stack **stack, t_logs *logs)
+{
+	t_stack	*head;
+	t_stack	*second;
+	t_stack	*tail;
+	t_stack	*third;
+
+	if (!stack || !(*stack) || !(*stack)->next)
+		return ;
+	head = *stack;
+	second = head->next;
+	if (handle_two_el(stack, logs))
+		return ;
 	tail = head->prev;
 	third = second->next;
 	tail->next = second;

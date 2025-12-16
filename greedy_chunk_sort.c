@@ -12,204 +12,9 @@
 
 #include "push_swap.h"
 
-int	min(int a, int b)
+static void	execute_move_2(t_stack **stack_a, t_stack **stack_b, t_logs *logs,
+		t_element *el)
 {
-	if (a < b)
-		return (a);
-	return (b);
-}
-
-int	max(int a, int b)
-{
-	if (a > b)
-		return (a);
-	return (b);
-}
-
-void	init_el_operations(t_element *el_operations)
-{
-	el_operations->ra = 0;
-	el_operations->rb = 0;
-	el_operations->rra = 0;
-	el_operations->rrb = 0;
-	el_operations->total = 0;
-}
-
-int	find_min_index(t_stack **stack_a, int size)
-{
-	t_stack	*ptr;
-	int		min;
-	int		index;
-	int		i;
-
-	if (!stack_a || !*stack_a || size == 0)
-		return (0);
-	ptr = *stack_a;
-	min = ptr->data;
-	index = 0;
-	i = 0;
-	while (i < size)
-	{
-		if (ptr->data < min)
-		{
-			min = ptr->data;
-			index = i;
-		}
-		ptr = ptr->next;
-		++i;
-	}
-	return (index);
-}
-
-int	find_place_a(t_stack **stack_a, t_stack *el, int size)
-{
-	t_stack	*ptr;
-	int		i;
-
-	if (!stack_a || !*stack_a || size == 0)
-		return (0);
-	ptr = *stack_a;
-	i = 0;
-	while (i < size)
-	{
-		if ((ptr->data < ptr->next->data
-				&& el->data > ptr->data
-				&& el->data < ptr->next->data)
-			|| (ptr->data > ptr->next->data
-				&& (el->data > ptr->data
-					|| el->data < ptr->next->data)))
-			return (i + 1);
-		ptr = ptr->next;
-		++i;
-	}
-	return (find_min_index(stack_a, size));
-}
-
-void	calc_strategy_part1(t_element *el, int *rr, int *rrr, t_costs *costs)
-{
-	*rr = min(el->ra, el->rb);
-	*rrr = min(el->rra, el->rrb);
-	costs->cost_rr = max(el->ra, el->rb);
-	costs->cost_rrr = max(el->rra, el->rrb);
-	costs->cost_ra_rrb = el->ra + el->rrb;
-	costs->cost_rra_rb = el->rra + el->rb;
-	el->strategy = RR;
-	el->total = costs->cost_rr;
-	if (costs->cost_rrr < el->total)
-	{
-		el->strategy = RRR;
-		el->total = costs->cost_rrr;
-	}
-	if (costs->cost_ra_rrb < el->total)
-	{
-		el->strategy = RA_RRB;
-		el->total = costs->cost_ra_rrb;
-	}
-	if (costs->cost_rra_rb < el->total)
-	{
-		el->strategy = RRA_RB;
-		el->total = costs->cost_rra_rb;
-	}
-}
-
-void	calc_strategy_part2(t_element *el, int *rr, int *rrr)
-{
-	el->rr = 0;
-	el->rrr = 0;
-
-	if (el->strategy == RR)
-	{
-		el->rr = *rr;
-		el->ra -= *rr;
-		el->rb -= *rr;
-		el->rra = 0;
-		el->rrb = 0;
-	}
-	else if (el->strategy == RRR)
-	{
-		el->rrr = *rrr;
-		el->rra -= *rrr;
-		el->rrb -= *rrr;
-		el->ra = 0;
-		el->rb = 0;
-	}
-}
-
-void	calc_strategy_part3(t_element *el)
-{
-	if (el->strategy == RA_RRB)
-	{
-		el->rra = 0;
-		el->rb = 0;
-	}
-	else if (el->strategy == RRA_RB)
-	{
-		el->ra = 0;
-		el->rrb = 0;
-	}
-}
-
-void	calc_strategy(t_element *el)
-{
-	int		rr;
-	int		rrr;
-	t_costs	costs;
-
-	calc_strategy_part1(el, &rr, &rrr, &costs);
-	calc_strategy_part2(el, &rr, &rrr);
-	calc_strategy_part3(el);
-}
-
-void	find_efficient_el(t_stack **stack_a, t_stack **stack_b,
-							t_element *best)
-{
-	int			size_a;
-	int			size_b;
-	int			i;
-	t_stack		*cur_b;
-	t_element	tmp;
-
-	if (!stack_b || !*stack_b)
-		return;
-	size_b = get_list_size(*stack_b);
-	size_a = get_list_size(*stack_a);
-	if (size_b == 0)
-		return ;
-	cur_b = *stack_b;
-	best->total = 2147483647;
-	i = 0;
-	while (i < size_b)
-	{
-		tmp.element = cur_b;
-		tmp.ra = find_place_a(stack_a, cur_b, size_a);
-		tmp.rra = size_a - tmp.ra;
-		tmp.rb = i;
-		tmp.rrb = size_b - i;
-		calc_strategy(&tmp);
-		if (tmp.total < best->total)
-			*best = tmp;
-		cur_b = cur_b->next;
-		i++;
-	}
-}
-
-void	execute_move(t_stack **stack_a, t_stack **stack_b, t_logs *logs, t_element *el)
-{
-	while (el->rr > 0)
-	{
-		rotate_r(stack_a, stack_b, logs);
-		el->rr--;
-	}
-	while (el->rrr > 0)
-	{
-		rrotate_r(stack_a, stack_b, logs);
-		el->rrr--;
-	}
-	while (el->ra > 0)
-	{
-		rotate_a(stack_a, logs);
-		el->ra--;
-	}
 	while (el->rra > 0)
 	{
 		rrotate_a(stack_a, logs);
@@ -228,29 +33,54 @@ void	execute_move(t_stack **stack_a, t_stack **stack_b, t_logs *logs, t_element 
 	push_a(stack_a, stack_b, logs);
 }
 
-void	bring_min_to_top(t_stack **stack_a, t_logs *logs)
+void	execute_move(t_stack **stack_a, t_stack **stack_b, t_logs *logs,
+		t_element *el)
 {
-	int		size;
-	int		min_index;
+	while (el->rr > 0)
+	{
+		rotate_r(stack_a, stack_b, logs);
+		el->rr--;
+	}
+	while (el->rrr > 0)
+	{
+		rrotate_r(stack_a, stack_b, logs);
+		el->rrr--;
+	}
+	while (el->ra > 0)
+	{
+		rotate_a(stack_a, logs);
+		el->ra--;
+	}
+	execute_move_2(stack_a, stack_b, logs, el);
+}
+
+static int	find_small_index(t_stack **stack_a, int size)
+{
 	int		i;
 	t_stack	*ptr;
 
-	if (!stack_a || !*stack_a)
-		return ;
-	size = get_list_size(*stack_a);
 	ptr = *stack_a;
-	min_index = 0;
+	size = get_list_size(*stack_a);
 	i = 0;
 	while (i < size)
 	{
 		if (ptr->data == 0)
-		{
-			min_index = i;
-			break ;
-		}
+			return (i);
 		ptr = ptr->next;
 		i++;
 	}
+	return (0);
+}
+
+void	bring_min_to_top(t_stack **stack_a, t_logs *logs)
+{
+	int		size;
+	int		min_index;
+
+	if (!stack_a || !*stack_a)
+		return ;
+	size = get_list_size(*stack_a);
+	min_index = find_small_index(stack_a, size);
 	if (min_index <= size / 2)
 		while (min_index-- > 0)
 			rotate_a(stack_a, logs);
@@ -259,12 +89,12 @@ void	bring_min_to_top(t_stack **stack_a, t_logs *logs)
 			rrotate_a(stack_a, logs);
 }
 
-void    greedy_chunk_sort(t_stack **stack_a, t_stack **stack_b, t_logs *logs)
+void	greedy_chunk_sort(t_stack **stack_a, t_stack **stack_b, t_logs *logs)
 {
 	int			size;
 	int			chunk_nr;
 	int			total_elements_per_chunk;	
-    t_element	el_operations;
+	t_element	el_operations;
 
 	normalize_data(stack_a);
 	size = get_list_size(*stack_a);

@@ -12,13 +12,14 @@
 
 #include "push_swap.h"
 
+/*testing---------------------------*/
 void	print_list(t_stack *stack)
 {
 	t_stack	*cur;
 
 	if (!stack)
 		return ;
-	printf("List ->:\n");
+	ft_printf("List ->:\n");
 	cur = stack;
 	do
 	{
@@ -27,6 +28,7 @@ void	print_list(t_stack *stack)
 	}while (cur != stack);
 	ft_printf("\n");
 }
+/*testing---------------------------*/
 
 void	init_log(t_logs *log)
 {

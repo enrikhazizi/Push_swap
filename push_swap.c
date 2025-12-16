@@ -67,7 +67,6 @@ int	choose_algorithm(char *mode, t_stack **stack_a, t_stack **stack_b,
 {
 	float	disorder;
 
-	printf("mode: %s\n", mode); //debug
 	disorder = compute_disorder(*stack_a);
 	if (ft_strcmp(mode, "--simple") == 0)
 		bubble_sort_list(stack_a, logs);
@@ -114,6 +113,7 @@ int	main(int argc, char **argv)
 	if (!choose_algorithm(mode, &stack_a, &stack_b, &logs))
 		return (print_error());
 	print_moves(&logs);
-	printf("total ops: %d\n", logs.total); //debug;
+	//ft_printf("total ops: %d\n", logs.total);
+	//printf("mode: %s\n", mode); //debug
 	return (0);
 }
