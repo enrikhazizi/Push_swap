@@ -13,7 +13,6 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include <stdio.h> //for testing only
 # include <unistd.h>
 # include <stdlib.h>
 # include <stddef.h>
@@ -47,6 +46,44 @@ typedef struct s_logs
 	int		rrr;
 	int		total;
 }	t_logs;
+
+typedef enum e_strategy
+{
+	RR,
+	RRR,
+	RRA_RB,
+	RA_RRB
+}	t_strategy;
+
+typedef struct s_element
+{
+	t_stack		*element;
+	int			ra;
+	int			rra;
+	int			rb;
+	int			rrb;
+	int			rr;
+	int			rrr;
+	int			total;
+	t_strategy	strategy;
+}	t_element;
+
+typedef struct s_costs
+{
+	int	cost_rr;
+	int	cost_rrr;
+	int	cost_ra_rrb;
+	int	cost_rra_rb;
+}	t_costs;
+
+typedef struct s_find_vars
+{
+	int			size_a;
+	int			size_b;
+	int			i;
+	t_stack		*cur_b;
+	t_element	tmp;
+}	t_find_vars;
 
 double	compute_disorder(t_stack *first);
 void	print_list(t_stack *stack);
@@ -87,5 +124,16 @@ int		get_sqrt(double x);
 void	bubble_sort_array(int *data, int size);
 void	index_data(t_stack **stack_a, int *data, int size);
 void	normalize_data(t_stack **stack_a);
+void	greedy_chunk_sort(t_stack **stack_a, t_stack **stack_b, t_logs *logs);
+void	rotate_r(t_stack **stack_a, t_stack **stack_b, t_logs *logs);
+void	rrotate_r(t_stack **stack_a, t_stack **stack_b, t_logs *logs);
+void	chunks_to_b(t_stack **stack_a, t_stack **stack_b,
+			int elements_per_chunk, t_logs *logs);
+void	find_efficient_el(t_stack **stack_a, t_stack **stack_b,
+			t_element *best);
+int		min(int a, int b);
+int		max(int a, int b);
+void	init_el_operations(t_element *el_operations);
+int		find_place_a(t_stack **stack_a, t_stack *el, int size);
 
 #endif

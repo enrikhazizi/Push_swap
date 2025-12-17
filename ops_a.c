@@ -12,6 +12,24 @@
 
 #include "push_swap.h"
 
+static int	handle_two_el(t_stack **stack, t_logs *logs)
+{
+	t_stack	*head;
+	t_stack	*second;
+
+	head = *stack;
+	second = head->next;
+	if (second->next == head)
+	{
+		*stack = second;
+		logs->sa++;
+		logs->total++;
+		log_moves(logs, "sa");
+		return (1);
+	}
+	return (0);
+}
+
 void	swap_a(t_stack **stack, t_logs *logs)
 {
 	t_stack	*head;
@@ -23,15 +41,8 @@ void	swap_a(t_stack **stack, t_logs *logs)
 		return ;
 	head = *stack;
 	second = head->next;
-	
-	if (second->next == head)
-	{
-		*stack = second;
-		logs->sa++;
-		logs->total++;
-		log_moves(logs, "sa");
+	if (handle_two_el(stack, logs))
 		return ;
-	}
 	third = second->next;
 	tail = head->prev;
 	tail->next = second;
