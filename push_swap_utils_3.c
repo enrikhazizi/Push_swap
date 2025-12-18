@@ -84,7 +84,7 @@ void	print_moves(t_logs *logs)
 {
 	while (logs->list)
 	{
-		ft_printf("%s\n", logs->list->data);
+		ft_printf(1, "%s\n", logs->list->data);
 		logs->list = logs->list->next;
 	}
 }

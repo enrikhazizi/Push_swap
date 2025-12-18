@@ -65,7 +65,7 @@ int	parse_args(int argc, char **argv, t_stack **stack_a, char **mode)
 int	choose_algorithm(char *mode, t_stack **stack_a, t_stack **stack_b,
 	t_logs *logs)
 {
-	float	disorder;
+	double	disorder;
 
 	disorder = compute_disorder(*stack_a);
 	if (ft_strcmp(mode, "--simple") == 0)
@@ -100,20 +100,25 @@ int	main(int argc, char **argv)
 	t_stack	*stack_b;
 	t_logs	logs;
 	char	*mode;
+	int		bench_mode;
+	double	disorder;
 
 	if (argc == 1)
 		return (0);
+	bench_mode = 0;
 	init(&stack_a, &stack_b, &logs, &mode);
+	parse_bench(&bench_mode, argv, argc);
 	if (!parse_args(argc, argv, &stack_a, &mode))
 		return (print_error());
 	if (!not_has_dupes(&stack_a))
 		return (print_error());
-	if (compute_disorder(stack_a) == 0)
+	disorder = compute_disorder(stack_a);
+	if (disorder == 0)
 		return (0);
 	if (!choose_algorithm(mode, &stack_a, &stack_b, &logs))
 		return (print_error());
 	print_moves(&logs);
-	//ft_printf("total ops: %d\n", logs.total);
-	//printf("mode: %s\n", mode); //debug
+	if (bench_mode)
+		print_bench(&logs, mode, disorder);
 	return (0);
 }

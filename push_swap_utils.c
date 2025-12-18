@@ -12,24 +12,6 @@
 
 #include "push_swap.h"
 
-/*testing---------------------------*/
-void	print_list(t_stack *stack)
-{
-	t_stack	*cur;
-
-	if (!stack)
-		return ;
-	ft_printf("List ->:\n");
-	cur = stack;
-	do
-	{
-		ft_printf("%d\n", cur->data);
-		cur = cur->next;
-	}while (cur != stack);
-	ft_printf("\n");
-}
-/*testing---------------------------*/
-
 void	init_log(t_logs *log)
 {
 	log->pa = 0;
@@ -42,6 +24,7 @@ void	init_log(t_logs *log)
 	log->rrb = 0;
 	log->rr = 0;
 	log->rrr = 0;
+	log->ss = 0;
 	log->total = 0;
 	log->list = NULL;
 }

@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-int	handle_two_el(t_stack **stack, t_logs *logs)
+int	handle_two_el_b(t_stack **stack, t_logs *logs)
 {
 	t_stack	*head;
 	t_stack	*second;
@@ -22,9 +22,9 @@ int	handle_two_el(t_stack **stack, t_logs *logs)
 	if (second->next == head)
 	{
 		*stack = second;
-		logs->sa++;
+		logs->sb++;
 		logs->total++;
-		log_moves(logs, "sa");
+		log_moves(logs, "sb");
 		return (1);
 	}
 	return (0);
@@ -41,7 +41,7 @@ void	swap_b(t_stack **stack, t_logs *logs)
 		return ;
 	head = *stack;
 	second = head->next;
-	if (handle_two_el(stack, logs))
+	if (handle_two_el_b(stack, logs))
 		return ;
 	tail = head->prev;
 	third = second->next;
@@ -73,6 +73,7 @@ void	push_b(t_stack **stack_a, t_stack **stack_b, t_logs *logs)
 void	rotate_b(t_stack **stack, t_logs *logs)
 {
 	*stack = (*stack)->next;
+	logs->rb++;
 	logs->total++;
 	log_moves(logs, "rb");
 }
@@ -80,6 +81,7 @@ void	rotate_b(t_stack **stack, t_logs *logs)
 void	rrotate_b(t_stack **stack, t_logs *logs)
 {
 	*stack = (*stack)->prev;
+	logs->rrb++;
 	logs->total++;
 	log_moves(logs, "rrb");
 }

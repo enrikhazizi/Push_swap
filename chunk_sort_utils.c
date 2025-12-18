@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   chunk_sort_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fqose <fqose@student.42.fr>                #+#  +:+       +#+        */
+/*   By: fqose <frenki.qose@learner.42.tech>        #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025-12-14 16:11:33 by fqose             #+#    #+#             */
 /*   Updated: 2025-12-14 16:11:33 by fqose            ###   ########.al       */
