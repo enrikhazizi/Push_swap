@@ -12,12 +12,12 @@
 
 #include "push_swap.h"
 
-void	init(t_stack **whole_stack, t_stack **whole_stack_b, t_logs *logs,
+void	init(t_stacks *stacks, t_logs *logs,
 		char **mode)
 {
 	init_log(logs);
-	*whole_stack_b = NULL;
-	*whole_stack = NULL;
+	stacks->stack_a = NULL;
+	stacks->stack_b = NULL;
 	*mode = "--adaptive";
 }
 

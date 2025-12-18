@@ -31,6 +31,12 @@ typedef struct s_stack
 	int				data;
 }	t_stack;
 
+typedef struct s_stacks
+{
+	t_stack	*stack_a;
+	t_stack	*stack_b;
+}	t_stacks;
+
 typedef struct s_logs
 {
 	t_moves	*list;
@@ -115,7 +121,7 @@ int		choose_algorithm(char *mode, t_stack **stack_a, t_stack **stack_b,
 int		ft_strcmp(char *s1, char *s2);
 int		ft_atoi_strict(const char *str, int *out);
 int		not_has_dupes(t_stack **stack_a);
-void	init(t_stack **whole_stack, t_stack **whole_stack_b, t_logs *logs,
+void	init(t_stacks *stacks, t_logs *logs,
 			char **mode);
 void	chunk_sort_list(t_stack **stack_a, t_stack **stack_b, t_logs *logs);
 t_moves	*new_move(char *data);

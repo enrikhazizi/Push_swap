@@ -30,9 +30,9 @@ void	parse_bench(int *bench_mode, char **argv, int argc)
 
 void	print_disorder_per(double disorder)
 {
-	int integer;
-	int decimal;
-	int scaled;
+	int	integer;
+	int	decimal;
+	int	scaled;
 
 	scaled = (int)(disorder * 10000 + 0.5);
 	integer = scaled / 100;
@@ -43,9 +43,19 @@ void	print_disorder_per(double disorder)
 	ft_printf(2, "%d%%\n", decimal);
 }
 
+void	print_operations(t_logs *logs)
+{
+	ft_printf(2, "[bench] total_ops:  %d\n", logs->total);
+	ft_printf(2, "[bench] sa:  %d  sb:  %d  ss:  %d  pa:  %d  pb:  %d\n",
+		logs->sa, logs->sb, logs->ss, logs->pa, logs->pb);
+	ft_printf(2, "[bench] ra: ");
+	ft_printf(2, "%d  rb:  %d  rr:  %d  rra:  %d  rrb:  %d  rrr:   %d\n",
+		logs->ra, logs->rb, logs->rr, logs->rra, logs->rrb, logs->rrr);
+}
+
 void	print_bench(t_logs *logs, char *mode, double disorder)
 {
-	char *strategy;
+	char	*strategy;
 
 	print_disorder_per(disorder);
 	if (ft_strcmp(mode, "--simple") == 0)
@@ -66,9 +76,5 @@ void	print_bench(t_logs *logs, char *mode, double disorder)
 		else
 			ft_printf(2, "O(n log n)\n");
 	}
-	ft_printf(2, "[bench] total_ops:  %d\n", logs->total);
-	ft_printf(2, "[bench] sa:  %d  sb:  %d  ss:  %d  pa:  %d  pb:  %d\n",
-			logs->sa, logs->sb, logs->ss, logs->pa, logs->pb);
-	ft_printf(2, "[bench] ra:  %d  rb:  %d  rr:  %d  rra:  %d  rrb:  %d  rrr:   %d\n",
-			logs->ra, logs->rb, logs->rr, logs->rra, logs->rrb, logs->rrr);
+	print_operations(logs);
 }

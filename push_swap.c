@@ -96,26 +96,25 @@ static int	print_error(void)
 
 int	main(int argc, char **argv)
 {
-	t_stack	*stack_a;
-	t_stack	*stack_b;
-	t_logs	logs;
-	char	*mode;
-	int		bench_mode;
-	double	disorder;
+	t_stacks	stacks;
+	t_logs		logs;
+	char		*mode;
+	int			bench_mode;
+	double		disorder;
 
 	if (argc == 1)
 		return (0);
 	bench_mode = 0;
-	init(&stack_a, &stack_b, &logs, &mode);
+	init(&stacks, &logs, &mode);
 	parse_bench(&bench_mode, argv, argc);
-	if (!parse_args(argc, argv, &stack_a, &mode))
+	if (!parse_args(argc, argv, &stacks.stack_a, &mode))
 		return (print_error());
-	if (!not_has_dupes(&stack_a))
+	if (!not_has_dupes(&stacks.stack_a))
 		return (print_error());
-	disorder = compute_disorder(stack_a);
+	disorder = compute_disorder(stacks.stack_a);
 	if (disorder == 0)
 		return (0);
-	if (!choose_algorithm(mode, &stack_a, &stack_b, &logs))
+	if (!choose_algorithm(mode, &stacks.stack_a, &stacks.stack_b, &logs))
 		return (print_error());
 	print_moves(&logs);
 	if (bench_mode)
