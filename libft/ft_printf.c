@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-int	format_printer(const char *s, va_list ap)
+int	format_printer(int fd, const char *s, va_list ap)
 {
 	int	i;
 	int	count;
@@ -20,27 +20,25 @@ int	format_printer(const char *s, va_list ap)
 	i = 0;
 	count = 0;
 	if (s[i] == 'd' || s[i] == 'i')
-		count += ft_putnbr_pf(va_arg(ap, int), 1);
+		count += ft_putnbr_pf(va_arg(ap, int), fd);
 	else if (s[i] == '%')
-		count += ft_putchar_pf(s[i], 1);
+		count += ft_putchar_pf(s[i], fd);
 	else if (s[i] == 's')
-		count += ft_putstr_pf(va_arg(ap, char *), 1);
+		count += ft_putstr_pf(va_arg(ap, char *), fd);
 	else if (s[i] == 'c')
-		count += ft_putchar_pf(va_arg(ap, int), 1);
+		count += ft_putchar_pf(va_arg(ap, int), fd);
 	else if (s[i] == 'u')
-		count += ft_putnub_uns_fd(va_arg(ap, unsigned int), 1);
+		count += ft_putnub_uns_fd(va_arg(ap, unsigned int), fd);
 	else if (s[i] == 'x')
-		count += ft_puthex_fd(va_arg(ap, unsigned int), 1, 'x');
+		count += ft_puthex_fd(va_arg(ap, unsigned int), fd, 'x');
 	else if (s[i] == 'X')
-		count += ft_puthex_fd(va_arg(ap, unsigned int), 1, 'X');
+		count += ft_puthex_fd(va_arg(ap, unsigned int), fd, 'X');
 	else if (s[i] == 'p')
-		count += print_pointer(va_arg(ap, void *));
-	else if (s[i] == 'a')
-		count += ft_putstr_pf("ketlina na boni reivew", 1);
+		count += print_pointer(va_arg(ap, void *), fd);
 	return (count);
 }
 
-int	ft_printf(const char *s, ...)
+int	ft_printf(int fd, const char *s, ...)
 {
 	int		i;
 	int		count;
@@ -54,10 +52,10 @@ int	ft_printf(const char *s, ...)
 		if (s[i] == '%')
 		{
 			i++;
-			count += format_printer(&s[i], ap);
+			count += format_printer(fd, &s[i], ap);
 		}
 		else
-			count += ft_putchar_pf(s[i], 1);
+			count += ft_putchar_pf(s[i], fd);
 		i++;
 	}
 	va_end(ap);

@@ -39,7 +39,7 @@ int	ft_puthex_fd(unsigned long n, int fd, char c)
 	return (count);
 }
 
-int	print_pointer(void *ptr)
+int	print_pointer(void *ptr, int fd)
 {
 	unsigned long	addr;
 	int				count;
@@ -52,6 +52,6 @@ int	print_pointer(void *ptr)
 		return (5);
 	}
 	write(1, "0x", 2);
-	count += ft_puthex_fd(addr, 1, 'x');
+	count += ft_puthex_fd(addr, fd, 'x');
 	return (count + 2);
 }

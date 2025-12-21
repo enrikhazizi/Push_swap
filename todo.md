@@ -15,8 +15,10 @@
     things to consider it uses printf must be ecxhange with ft_printf - done
 --Concerning there was a bug in swap in case of swaping only 2 nodes -fixed(check again for safety)
 	also when push swap uses chunk sort the print list is indexed no problem those printed value wont be used.
+- Make Benchmark Mode -- done
 
 
 --Concerning as well it seem we must allow negative values as well (will handle it after fixing norminette for complex algo - frenki);
-- Make Benchmark Mode
+		frenki: it bugs when inputing -2 and 2 at the same time, probably thinks they are the same -- will handle later
+-- fix norminette for bubble sort
 - Optimize and simplify the operations

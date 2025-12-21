@@ -29,3 +29,54 @@ void	rrotate_r(t_stack **stack_a, t_stack **stack_b, t_logs *logs)
 	logs->total++;
 	log_moves(logs, "rrr");
 }
+
+void	sswap_2(t_stack **stack, t_logs *logs)
+{
+	t_stack	*head;
+	t_stack	*second;
+	t_stack	*tail;
+	t_stack	*third;
+
+	if (!stack || !(*stack) || !(*stack)->next)
+		return ;
+	head = *stack;
+	second = head->next;
+	if (handle_two_el_b(stack, logs))
+		return ;
+	third = second->next;
+	tail = head->prev;
+	tail->next = second;
+	second->prev = tail;
+	head->next = third;
+	third->prev = head;
+	second->next = head;
+	*stack = second;
+	log_moves(logs, "ss");
+	logs->ss++;
+	logs->total++;
+}
+
+void	sswap(t_stack **stack_a, t_stack **stack_b, t_logs *logs)
+{
+	t_stack	*head;
+	t_stack	*second;
+	t_stack	*tail;
+	t_stack	*third;
+
+	if (!stack_a || !(*stack_a) || !(*stack_a)->next)
+		return ;
+	head = *stack_a;
+	second = head->next;
+	if (handle_two_el_a(stack_a, logs))
+		return ;
+	third = second->next;
+	tail = head->prev;
+	tail->next = second;
+	second->prev = tail;
+	head->next = third;
+	third->prev = head;
+	second->next = head;
+	head->prev = second;
+	*stack_a = second;
+	sswap_2(stack_b, logs);
+}
