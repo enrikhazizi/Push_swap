@@ -91,7 +91,7 @@ void	insertion_sort_list(t_stack **stack_a, t_stack **stack_b, t_logs *logs)
 	}
 }
 
-int find_bits(int biggi)
+int	find_bits(int biggi)
 {
 	int	max_bits;
 
