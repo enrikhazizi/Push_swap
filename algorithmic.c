@@ -6,7 +6,7 @@
 /*   By: ehazizi <ehazizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 17:12:59 by ehazizi           #+#    #+#             */
-/*   Updated: 2025/12/15 14:36:57 by ehazizi          ###   ########.fr       */
+/*   Updated: 2025/12/22 19:11:39 by ehazizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,8 @@ void	bubble_sort_list(t_stack **stack, t_logs *logs)
 	int	j;
 	int	size;
 
-	if (!stack || !*stack )
+	if (!stack || !*stack)
 		return ;
-
 	i = 0;
 	size = get_list_size(*stack);
 	if (size == 2)
@@ -29,7 +28,6 @@ void	bubble_sort_list(t_stack **stack, t_logs *logs)
 			swap_a(stack, logs);
 		return ;
 	}
-
 	while (i < size - 1)
 	{
 		j = 0;
@@ -95,10 +93,10 @@ void	insertion_sort_list(t_stack **stack_a, t_stack **stack_b, t_logs *logs)
 
 int find_bits(int biggi)
 {
-	int max_bits;
+	int	max_bits;
 
 	max_bits = 0;
-	while(biggi > 0)
+	while (biggi > 0)
 	{
 		biggi >>= 1;
 		max_bits++;
@@ -131,7 +129,7 @@ void	radix_sort(t_stack **stack_a, t_stack **stack_b, t_logs *logs)
 			j++;
 		}
 		while (*stack_b)
-			push_a(stack_a, stack_b , logs);
+			push_a(stack_a, stack_b, logs);
 		i++;
 	}
 }
