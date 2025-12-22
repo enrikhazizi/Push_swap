@@ -20,30 +20,22 @@ void	bubble_sort_list(t_stack **stack, t_logs *logs)
 
 	if (!stack || !*stack)
 		return ;
-	i = 0;
 	size = get_list_size(*stack);
 	if (size == 2)
-	{
-		if ((*stack)->data > (*stack)->next->data)
-			swap_a(stack, logs);
-		return ;
-	}
+		return (bubble_swap(stack, logs));
+	i = 0;
 	while (i < size - 1)
 	{
 		j = 0;
-		while (j < size - 1 - i)
+		while (j++ < size - 1 - i)
 		{
 			if ((*stack)->data > (*stack)->next->data)
 				swap_a(stack, logs);
 			rotate_a(stack, logs);
-			j++;
 		}
 		j = 0;
-		while (j < size - 1 - i)
-		{
+		while (j++ < size - 1 - i)
 			rrotate_a(stack, logs);
-			j++;
-		}
 		i++;
 	}
 }
@@ -106,16 +98,14 @@ int	find_bits(int biggi)
 
 void	radix_sort(t_stack **stack_a, t_stack **stack_b, t_logs *logs)
 {
-	int	biggest_nbr;
 	int	size;
 	int	max_bits;
 	int	i;
 	int	j;
 
 	normalize_data(stack_a);
-	biggest_nbr = get_max(stack_a);
 	size = get_list_size(*stack_a);
-	max_bits = find_bits(biggest_nbr);
+	max_bits = find_bits(get_max(stack_a));
 	i = 0;
 	while (i < max_bits)
 	{

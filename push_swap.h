@@ -147,5 +147,6 @@ void	print_bench(t_logs *logs, char *mode, double disorder);
 int		handle_two_el_a(t_stack **stack, t_logs *logs);
 int		handle_two_el_b(t_stack **stack, t_logs *logs);
 void	radix_sort(t_stack **stack_a, t_stack **stack_b, t_logs *logs);
+void	bubble_swap(t_stack **stack, t_logs *logs);
 
 #endif
