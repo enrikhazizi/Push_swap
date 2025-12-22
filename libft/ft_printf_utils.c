@@ -48,10 +48,10 @@ int	print_pointer(void *ptr, int fd)
 	addr = (unsigned long)ptr;
 	if (addr == 0)
 	{
-		write(1, "(nil)", 5);
+		write(fd, "(nil)", 5);
 		return (5);
 	}
-	write(1, "0x", 2);
+	write(fd, "0x", 2);
 	count += ft_puthex_fd(addr, fd, 'x');
 	return (count + 2);
 }

@@ -11,11 +11,15 @@
 - Make anothe simple algorithm -- insertion sort done
 - Make medium algorithm -- done chunk sort
 - Make complex algorithm -- done advancded chunk sort
+
+- Made complex algo -- radix sort LSB version --(Things to say gave up on bucket sort or any other other algo it was the same shit as chunk sort while i did build  i wont include since it wasnt worth it to make the code more filled)
+
 - Print or log all the operations -done
     things to consider it uses printf must be ecxhange with ft_printf - done
 --Concerning there was a bug in swap in case of swaping only 2 nodes -fixed(check again for safety)
 	also when push swap uses chunk sort the print list is indexed no problem those printed value wont be used.
 - Make Benchmark Mode -- done
+    (there seems to be  a bug in the amount of ops shown in benchamrk)
 
 
 --Concerning as well it seem we must allow negative values as well (will handle it after fixing norminette for complex algo - frenki);

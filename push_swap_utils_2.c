@@ -53,6 +53,7 @@ int	get_max(t_stack **node)
 	return (i);
 }
 
+
 int	get_list_size(t_stack *stack)
 {
 	int		count;

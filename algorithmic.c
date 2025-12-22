@@ -92,3 +92,46 @@ void	insertion_sort_list(t_stack **stack_a, t_stack **stack_b, t_logs *logs)
 		++i;
 	}
 }
+
+int find_bits(int biggi)
+{
+	int max_bits;
+
+	max_bits = 0;
+	while(biggi > 0)
+	{
+		biggi >>= 1;
+		max_bits++;
+	}
+	return (max_bits);
+}
+
+void	radix_sort(t_stack **stack_a, t_stack **stack_b, t_logs *logs)
+{
+	int	biggest_nbr;
+	int	size;
+	int	max_bits;
+	int	i;
+	int	j;
+
+	normalize_data(stack_a);
+	biggest_nbr = get_max(stack_a);
+	size = get_list_size(*stack_a);
+	max_bits = find_bits(biggest_nbr);
+	i = 0;
+	while (i < max_bits)
+	{
+		j = 0;
+		while (j < size)
+		{
+			if (((*stack_a)->data >> i) & 1)
+				rotate_a(stack_a, logs);
+			else
+				push_b(stack_a, stack_b, logs);
+			j++;
+		}
+		while (*stack_b)
+			push_a(stack_a, stack_b , logs);
+		i++;
+	}
+}

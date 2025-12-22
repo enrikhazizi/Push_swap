@@ -71,7 +71,7 @@ int	choose_algorithm(char *mode, t_stack **stack_a, t_stack **stack_b,
 	if (ft_strcmp(mode, "--simple") == 0)
 		bubble_sort_list(stack_a, logs);
 	else if (ft_strcmp(mode, "--medium") == 0)
-		chunk_sort_list(stack_a, stack_b, logs);
+		radix_sort(stack_a, stack_b, logs);
 	else if (ft_strcmp(mode, "--complex") == 0)
 		greedy_chunk_sort(stack_a, stack_b, logs);
 	else if (ft_strcmp(mode, "--adaptive") == 0)

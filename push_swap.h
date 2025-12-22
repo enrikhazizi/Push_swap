@@ -16,7 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stddef.h>
-# include "./libft/libft.h"
+# include "./libft/ft_printf.h"
 
 typedef struct s_moves
 {
@@ -146,5 +146,6 @@ void	parse_bench(int *bench_mode, char **argv, int argc);
 void	print_bench(t_logs *logs, char *mode, double disorder);
 int		handle_two_el_a(t_stack **stack, t_logs *logs);
 int		handle_two_el_b(t_stack **stack, t_logs *logs);
+void	radix_sort(t_stack **stack_a, t_stack **stack_b, t_logs *logs);
 
 #endif
