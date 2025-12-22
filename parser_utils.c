@@ -19,6 +19,9 @@ int	is_nr(char *str)
 	i = 0;
 	while (str[i])
 	{
+		if ((str[i] == '-' || str[i] == '+') && str[i + 1] != '\0'
+			&& str[i + 1] != ' ')
+			++i;
 		if (!ft_isdigit(str[i]) && str[i] != ' ')
 			return (0);
 		++i;

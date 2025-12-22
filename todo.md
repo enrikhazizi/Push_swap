@@ -23,6 +23,6 @@
 
 
 --Concerning as well it seem we must allow negative values as well (will handle it after fixing norminette for complex algo - frenki);
-		frenki: it bugs when inputing -2 and 2 at the same time, probably thinks they are the same -- will handle later
--- fix norminette for bubble sort
+		frenki: it bugs when inputing -2 and 2 at the same time, probably thinks they are the same -- will handle later -- Done
 - Optimize and simplify the operations
+-- fix norminette for bubble sort

@@ -142,7 +142,7 @@ int		min(int a, int b);
 int		max(int a, int b);
 void	init_el_operations(t_element *el_operations);
 int		find_place_a(t_stack **stack_a, t_stack *el, int size);
-void	parse_bench(int *bench_mode, char **argv, int argc);
+void	parse_bench(int *bench_mode, char **argv, int *argc);
 void	print_bench(t_logs *logs, char *mode, double disorder);
 int		handle_two_el_a(t_stack **stack, t_logs *logs);
 int		handle_two_el_b(t_stack **stack, t_logs *logs);

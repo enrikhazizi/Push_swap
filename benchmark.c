@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void	parse_bench(int *bench_mode, char **argv, int argc)
+void	parse_bench(int *bench_mode, char **argv, int *argc)
 {
 	int	i;
 
@@ -20,11 +20,12 @@ void	parse_bench(int *bench_mode, char **argv, int argc)
 	if (ft_strcmp(argv[1], "--bench") == 0)
 	{
 		*bench_mode = 1;
-		while (i < argc)
+		while (i < *argc)
 		{
 			argv[i] = argv[i + 1];
 			++i;
 		}
+		*argc = *argc - 1;
 	}
 }
 

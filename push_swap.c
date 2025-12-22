@@ -71,9 +71,9 @@ int	choose_algorithm(char *mode, t_stack **stack_a, t_stack **stack_b,
 	if (ft_strcmp(mode, "--simple") == 0)
 		bubble_sort_list(stack_a, logs);
 	else if (ft_strcmp(mode, "--medium") == 0)
-		radix_sort(stack_a, stack_b, logs);
+		chunk_sort_list(stack_a, stack_b, logs);
 	else if (ft_strcmp(mode, "--complex") == 0)
-		greedy_chunk_sort(stack_a, stack_b, logs);
+		radix_sort(stack_a, stack_b, logs);
 	else if (ft_strcmp(mode, "--adaptive") == 0)
 	{
 		if (disorder < 0.2)
@@ -81,7 +81,7 @@ int	choose_algorithm(char *mode, t_stack **stack_a, t_stack **stack_b,
 		else if (disorder < 0.5)
 			chunk_sort_list(stack_a, stack_b, logs);
 		else
-			greedy_chunk_sort(stack_a, stack_b, logs);
+			radix_sort(stack_a, stack_b, logs);
 	}
 	else
 		return (0);
@@ -106,7 +106,7 @@ int	main(int argc, char **argv)
 		return (0);
 	bench_mode = 0;
 	init(&stacks, &logs, &mode);
-	parse_bench(&bench_mode, argv, argc);
+	parse_bench(&bench_mode, argv, &argc);
 	if (!parse_args(argc, argv, &stacks.stack_a, &mode))
 		return (print_error());
 	if (!not_has_dupes(&stacks.stack_a))
