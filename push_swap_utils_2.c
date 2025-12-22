@@ -6,7 +6,7 @@
 /*   By: ehazizi <ehazizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 17:14:30 by ehazizi           #+#    #+#             */
-/*   Updated: 2025/12/10 17:20:45 by ehazizi          ###   ########.fr       */
+/*   Updated: 2025/12/22 19:09:29 by ehazizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int	get_max(t_stack **node)
 	}
 	return (i);
 }
-
 
 int	get_list_size(t_stack *stack)
 {
