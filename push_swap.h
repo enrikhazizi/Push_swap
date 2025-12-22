@@ -148,5 +148,6 @@ int		handle_two_el_a(t_stack **stack, t_logs *logs);
 int		handle_two_el_b(t_stack **stack, t_logs *logs);
 void	radix_sort(t_stack **stack_a, t_stack **stack_b, t_logs *logs);
 void	bubble_swap(t_stack **stack, t_logs *logs);
-
+void	free_doubly(t_stack *head);
+void	free_mem(t_moves *moves);
 #endif

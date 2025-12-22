@@ -15,18 +15,24 @@
 int	is_nr(char *str)
 {
 	int	i;
+	int has_digit;
 
 	i = 0;
+	has_digit = 0;
+	if (!str || str[0] == '\0')
+		return (0);
 	while (str[i])
 	{
 		if ((str[i] == '-' || str[i] == '+') && str[i + 1] != '\0'
 			&& str[i + 1] != ' ')
 			++i;
-		if (!ft_isdigit(str[i]) && str[i] != ' ')
+		if (ft_isdigit(str[i]))
+			has_digit = 1;
+		else if (str[i] != ' ')
 			return (0);
 		++i;
 	}
-	return (1);
+	return (has_digit);
 }
 
 int	ft_strcmp(char *s1, char *s2)
@@ -69,7 +75,10 @@ int	create_from_single(char *str, t_stack **whole_stack)
 	while (token[i])
 	{
 		if (!ft_atoi_strict(token[i], &num))
+		{
+			free_split(token);
 			return (0);
+		}
 		create_list(whole_stack, num);
 		++i;
 	}

@@ -69,7 +69,7 @@ int	choose_algorithm(char *mode, t_stack **stack_a, t_stack **stack_b,
 
 	disorder = compute_disorder(*stack_a);
 	if (ft_strcmp(mode, "--simple") == 0)
-		bubble_sort_list(stack_a, logs);
+		insertion_sort_list(stack_a, stack_b, logs);
 	else if (ft_strcmp(mode, "--medium") == 0)
 		chunk_sort_list(stack_a, stack_b, logs);
 	else if (ft_strcmp(mode, "--complex") == 0)
@@ -119,5 +119,8 @@ int	main(int argc, char **argv)
 	print_moves(&logs);
 	if (bench_mode)
 		print_bench(&logs, mode, disorder);
+	free_mem(logs.list);
+	free_doubly(stacks.stack_a);
+	free_doubly(stacks.stack_b);
 	return (0);
 }

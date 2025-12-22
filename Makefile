@@ -7,7 +7,7 @@ NAME = push_swap
 SRC = \
 	algorithmic.c benchmark.c chunk_sort_utils.c chunk_sort.c greedy_chunk_sort.c \
 	greedy_chunk_strategy.c greedy_chunk_utils.c ops_a.c ops_b.c ops_mix.c parser_utils.c \
-	push_swap_utils_2.c push_swap_utils_3.c push_swap_utils.c push_swap.c
+	push_swap_utils_2.c push_swap_utils_3.c push_swap_utils.c free_memory.c push_swap.c
 
 LIBFT_DIR = libft
 LIBFT_SRC = \

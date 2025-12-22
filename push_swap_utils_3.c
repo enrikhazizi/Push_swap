@@ -82,9 +82,12 @@ void	log_moves(t_logs *log, char *data)
 
 void	print_moves(t_logs *logs)
 {
+	t_moves *tmp;
 	while (logs->list)
 	{
 		ft_printf(1, "%s\n", logs->list->data);
+		tmp = logs->list;
 		logs->list = logs->list->next;
+		free(tmp);
 	}
 }
